@@ -1,0 +1,108 @@
+<script type="text/template" id="lbsShowPNX-tpl">
+	<span class="showpnx" style="display: none;position:relative;top:-6px;">
+		<span style="display:inline-flex;flex-direction:column;">
+		   <a style="font-size:6px;" target="blank" title="Show XML" href="/primo_library/libweb/jqp/record/{{ record_id }}.xml">XML</a>
+		   <a style="font-size:6px;" target="blank" title="Show PNX" href="/primo_library/libweb/jqp/record/{{ record_id }}.pnx">PNX</a>
+		</span>
+	</span>
+</script>
+
+<script type="text/template" id="lbsShare-tpl">
+    <div style='overflow:auto;height:100%'>
+	{{ var record_id = record_ids.splice(0,1).join(''); }}
+
+        <b>{{ labels.recordID }}:</b> {{ record_id }} {{ jQuery.PRIMO.template.renderById('lbsShowPNX-tpl', {record_id: record_id}) }} 
+        {{ if (record_ids.length > 1) { }}
+		(
+		{{ for(var i=0; i < record_ids.length; i++) { }}
+			{{ record_ids[i] }}
+        		{{ jQuery.PRIMO.template.renderById('lbsShowPNX-tpl', {record_id: record_ids[i]}) }} 
+			{{ if (i < record_ids.length-1) { }}
+			,
+	        	{{ } }}
+	
+	        {{ } }}
+		)
+	{{ } }}
+
+        <ul class="share_options"> 
+	  <div class="share_options_import"></div>
+	</ul>
+    </div>
+</script>
+
+<script type="text/template" id="lbsReport-tpl">
+<div id='report_a_problem_{{ idx }}' style='background-color:#e9e9e9;font-family: "Roboto",sans-serif;'>
+    <header style='background-color:#53738c;padding:5px;height:27px;line-height:27px;color:white;vertical-align:middle;'>{{ reportAProblemTitle }}</header>
+    <section style='padding:5px;height:150px;'>
+		<div style='display:flex;align-items:stretch;padding:5px;'>
+		  <label for='contactEmail'> {{ reportAProblemContactEmail }}</label>
+		  <input style='flex:1;margin-left:10px;' type="email" name='contactEmail' id='contactEmail' value='{{ email }}'/>
+		</div>
+                <div style='display:flex;align-items:stretch;padding:5px;'>  
+                  <textarea style='height:100px;flex:1;resize:none;'></textarea>
+                </div>
+    </section>
+    <footer style='border-top:1px outset black;display:flex;'>
+          <span style='flex:4;'>&nbsp;</span>
+          <button style='flex:1;background: #6b8da7;color:white;border:none;padding:4px;border-radius:3px;margin:5px;font-size: 1.05em;' onclick='return reportAProblem.remove({{ idx }})'>Cancel</button>
+          <button style='flex:1;background: #68bdc4;color:white;border:none;padding:4px;border-radius:3px;margin:5px;font-size: 1.05em;' onclick='return reportAProblem.send({{ idx }})'>Submit</button>
+    </footer>
+</div>  
+</script>
+
+<script type="text/template" id="lbsUIFeedback-tpl">
+        <div id="lbsUIFeedback" style="background-color: {{bgcolor}}; color: {{txtcolor}}; border: 1px solid {{bgcolor}};position:relative;text-align:center;">
+          <span> {{data.messages[0]}}
+            <a href="{{data.url}}" target="_blank">{{data.messages[1]}}</a>
+            {{data.messages[2]}}
+	    <span id="lbsUIFeedbackClose" style='font-size:8px;margin-left:10px;'>[X]</span>
+          </span>
+        </div>
+</script>
+
+<script type="text/template" id="lbsPayFines-tpl">
+	<style>
+		.payNowContainer {
+			padding-top: 12px;width:140px ; margin-left:auto;
+		}
+
+		.payNow {
+			background: #68bdc4 none repeat scroll 0 0 !important;
+			border-radius: 3px 3px 3px 3px !important;
+			color: #fff !important;
+			font-family: "Roboto",sans-serif !important;
+			font-size: 1em !important;
+			font-weight: 300 !important;
+			text-transform: uppercase;
+			padding:3px;
+		}
+	</style>
+
+	<div class='payNowContainer'>  
+		<a class='payNow' href='https://services.libis.be/pay_my_fines'>Pay fines</a>
+	</div>
+</script>
+
+<script  type="text/template" id="lbsFeedbackForm-tpl">
+ <div id="feedbackForm" 
+  style='background-color: #e9e9e9; font-family: "Roboto",sans-serif; position: absolute; top: 30px; z-index: 1000; border: 1px solid black; border-radius: 5px; right: 30px; width: 500px;'>
+	 <header style='background-color:#53738c;padding:5px;height:27px;line-height:27px;color:white;vertical-align:middle;'>Feedback</header>
+	 <section>
+		<div style='display:flex;align-items:stretch;padding:5px;'>
+		  <label for='feedbackContactEmail'>{{ replyTo }}</label>
+		  <input style='flex:1;margin-left:10px;' type="email" name='feedbackContactEmail' id='feedbackContactEmail' value='{{ email }}'/>
+		</div>
+                <div style='display:flex;align-items:stretch;padding:5px;'>  
+                  <textarea style='height:100px;flex:1;resize:none;'></textarea>
+                </div>
+	 </section>
+	 <footer>
+          <span style='flex:4;'>&nbsp;</span>
+          <button style='flex:1;background: #6b8da7;color:white;border:none;padding:4px;border-radius:3px;margin:5px;font-size: 1.05em;' 
+		  onclick='return feedbackForm.remove()'>Cancel</button>
+          <button style='flex:1;background: #68bdc4;color:white;border:none;padding:4px;border-radius:3px;margin:5px;font-size: 1.05em;' 
+		  onclick='return feedbackForm.send()'>Submit</button>
+         </footer>
+ </div>
+</script>
