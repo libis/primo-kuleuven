@@ -5,7 +5,7 @@ Fixes &amp; addons to the Primo 4.0 ui
 `build.sh`
 
 ## Install
-Reference `lbs_src.js` in the footer.html of Primo.
+Reference `lbs_src.js` and load the contents of `templates.html` into `footer.html`.
 
 ## Dependencies
 These scripts depend heavily on [jQuery.PRIMO](https://github.com/mehmetc/jQuery.PRIMO "Check it out!")
